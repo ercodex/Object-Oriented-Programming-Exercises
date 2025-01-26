@@ -3,7 +3,7 @@ This repository contains a collection of C++ practice codes designed to be educa
 
 All the codes in this repository were written by me to enhance my C++ programming skills, especially in object-oriented programming style. They are primarily focused on helping me achieve excellent grades in college exams.
 
-## Contains
+## Contains:
 - Classes and Objects
 - Operator Overloading
 - Inheritance
