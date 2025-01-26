@@ -1,0 +1,192 @@
+1) Değer parametresi vs Referans Parametresi:
+    # C++ dilinde referans parametre ile normal (değer) parametre arasındaki en temel fark, fonksiyona
+    aktarılan değişkenin davranışında ortaya çıkar. Normal (değer) parametreler, fonksiyonlara 
+    değişkenin bir kopyası olarak geçirilirken, referans parametreler doğrudan değişkenin kendisini
+    işaret eder. Bu da bazı durumlarda bellekteki performansı etkiler ve fonksiyonun etkisini belirler.
+
+    # Bellek Kullanımı: 
+        
+        # Normal Parametre: Fonksiyon, değişkenin bir kopyasını oluşturur ve bellekte yeni bir alan
+        ayırır.
+        
+        # Referans Parametre: Kopya oluşturmaz, bellekteki orijinal değişkeni kullanır. Bu sayede,
+        özellikle büyük veri yapılarını fonksiyonlara geçirirken bellek tasarrufu sağlar.
+    
+    # Fonksiyon Etkisi:
+        
+        # Normal Parametre: Fonksiyon içinde yapılan değişiklikler, ana değişkeni etkilemez.
+        
+        # Referans Parametre: Fonksiyon içinde yapılan değişiklikler, ana değişkenin değerini değiştirir.
+
+    # Güvenlik:
+        
+        # Normal Parametre: Orijinal veri değişmeden kaldığından güvenlidir.
+        
+        # Referans Parametre: Fonksiyon içindeki hatalı işlemler, orijinal veriyi değiştirebilir.
+
+2) Scope Resolution Operator (::): Özellikle bir değişkenin hem yerel hem global tanımlandığı durumlarda
+global değişkene erişmek için kullanılır. Diğer bir kullanımı ise bir sınıf (Class) ya da 'namespace'
+içinde tanımlı üyelere erişmektir.
+
+3) Copy Constructor vs Copy Assignment Operator:
+    
+    Copy Constructor:
+        
+        # Kopya yapıcı, bir sınıftan yeni bir nesne oluşturulurken başka bir nesneden kopya alınması 
+        gerektiğinde çağrılır. Başka bir deyişle, bir nesnenin aynı sınıfa ait başka bir nesneyle 
+        başlatıldığı durumlarda çalışır. Kopya yapıcı, sınıfın mevcut bir nesnesinden yeni bir nesne 
+        oluşturulmasını sağlar.
+            
+            # Doğrudan Kopya Başlatma: A a2 = a1; veya A a2(a1); yazıldığında kopya yapıcı devreye girer.
+            
+            # Fonksiyonlara Parametre Olarak Nesne Geçirilmesi: Bir nesne, bir fonksiyona değer olarak 
+            parametre geçtiğinde kopya yapıcı çalışır.
+            
+            # Fonksiyonlardan Nesne Döndürülmesi: Bir nesne, fonksiyondan döndürülürken de kopya yapıcı 
+            kullanılır.
+    
+    Copy Assignment Operator:
+        
+        # Kopya atama operatörü, zaten var olan bir nesneye başka bir nesnenin içeriğini atamak için 
+        kullanılır. Yani, nesne zaten oluşturulmuşsa ve sonradan başka bir nesneye eşitleniyorsa kopya 
+        atama operatörü çalışır. Kopya atama operatörünü varsayılan olarak sınıfın içinde operator= 
+        şeklinde tanımlayabiliriz.
+            
+            # A a2 = a1; ifadesi kopya yapıcıyı çağırır, çünkü a2 henüz yeni oluşturuluyor.
+            
+            # A a2; a2 = a1; ifadesinde ise a2 zaten var olduğundan kopya atama operatörü (operator=) çağrılır.
+
+            Özetle:
+        
+                # Kopya yapıcı kullanmak: Bir nesne başka bir nesne ile oluşturuluyorsa 
+                (örneğin A a2 = a1;), kopya yapıcı devreye girer. Kopya yapıcı kullanarak, nesnenin 
+                başka bir nesneyle başlatılması gereken durumlarda veri bütünlüğünü koruyabilirsin. 
+                Örneğin, bir veri yapısında, kopyalarla işlem yaparken önemli olur.
+                
+                # Kopya atama operatörü: Bir nesne var olduktan sonra başka bir nesne ile eşitleniyorsa 
+                (örneğin a2 = a1;), atama operatörü (operator=) çalışır. Kopya atama operatörü, mevcut 
+                bir nesneye başka bir nesnenin içeriği atanırken gerektiğinde ek işlemler yapmak için 
+                kullanılır.
+                
+                # Varsayılan yapıcı: Bir sınıfta üye nesneler varsa, bu nesneler yapıcıda özel bir değer
+                almadıkça varsayılan yapıcı ile başlatılır. Varsayılan yapıcı, özellikle sınıf içindeki 
+                üye nesnelerin varsayılan değerle başlatılmasını sağlar ve varsayılan parametreler ile 
+                birlikte kullanılabilir.
+
+4) Program sona erdiğinde (return 0), oluşturulan nesneler, ters sırada yok edilir. Örneğin, en son 
+yaratılan ilk yok edilir.
+
+5) Default Parameter: Parametre değerinin belirtilmemesi halinde kullanılacak bir varsayılan değer
+tanımlamak anlamına gelir. Default parametreler sağdan sola tanımlanmalıdır. Yani, önceki parametrelerde
+bir varsayılan değer yokken daha sonraki parametrelere Default değer atayamayız.
+
+    # Default Parameter'larla Function Overload yapılırken dikkat edilmelidir. Çünkü belirsizlik oluşabilir.
+    (Bkz. defaultParam.cpp)
+
+    # Özetle:
+        
+        # Varsayılan argümanlar sağdan sola doğru tanımlanmalıdır. Ortadaki bir parametreye varsayılan 
+        değer atanamaz.
+        
+        # Fonksiyon aşırı yükleme durumunda, belirsizlik yaratmamaya dikkat edilmelidir. Varsayılan
+        değerlerle birden fazla aşırı yüklenmiş fonksiyon, aynı parametreyle çağrıldığında hata 
+        verebilir.
+        
+        # Eksik parametrelerle çağrılarda, C++ varsayılan argümanları sırasına göre otomatik olarak 
+        doldurur. 
+
+6) Friend Class: Friend class (arkadaş sınıfı), C++’ta bir sınıfa, başka bir sınıfın özel (private)
+veya korumalı (protected) üyelerine erişim hakkı veren bir tanımlamadır. Bu, iki veya daha fazla sınıf
+arasında daha sıkı bir entegrasyon sağlamak için kullanılır.
+
+    # Erişim Hakları: friend anahtar kelimesi kullanıldığında, friend sınıfı diğer sınıfın özel ve korumalı 
+    üyelerine doğrudan erişim hakkına sahip olur. Bu, encapsulation (kapsülleme) ilkesine aykırı gibi 
+    görünse de, bazı durumlarda sınıflar arasında gerekli bir işbirliği sağlar.
+
+    # Tanım: Friend sınıfı, genellikle erişim sağlamak istediğimiz sınıfın içinde tanımlanır.
+    Bu tanım, friend olan sınıfın adının ardından friend class ifadesiyle yapılır.
+
+    # Kapsama Alanı: Friend sınıf, yalnızca erişim izni verilen sınıfın üyelerine 
+    erişebilir; diğer sınıfların üyelerine erişim hakkı yoktur.
+
+7) Static Variable: Static değişkenler class içinde yalnızca beyan edilebilir, class dışında bir kereye 
+mahsus değer ataması yapılmalıdır. Static değişkenler sınıfa özgüdür, nesneye değil. Eğer bir Static
+değişken const olarak tanımlanmışsa, ilk değer ataması sınıf içinde de yapılabilir, tabii ki ileride
+değerini değiştirmeyeceksen. Peki, değerini değiştirmeyeceksen const bir static değişken oluşturmanın
+anlamı ne?
+
+8) Üye fonksiyonlardan, erişimci olanları 'const' tanımla. Fonksiyon, sınıfın üyelerini değiştirecek 
+kodlamaları içeremez. Böylece, fonksiyon kodlamaları yapılırken, yapılabilecek hatalı işlemler için 
+kısıt koyulmuş olur.
+
+9) Private değişkenlere yine private içinde bir değer atanması normaldir. Güvenli bir şekilde ilklendirilmelerini
+sağlayan bir işlemdir.
+
+10) Header Guard'ları unutma. Güzel detay.
+
+11) return (*this), bir sınıfın (class) üye fonksiyonu içinde kullanıldığında, fonksiyonu çağıran nesnenin
+kendisini (şu anki nesneyi) döndürür. Bu ifade, *this pointer’ı üzerinden çalışır; yani this göstericisi 
+ile işaret edilen nesneyi, referans olarak değil, kopyalanmış bir değeri döndürür. Bu yapı özellikle 
+atama (assignment) operatörlerinin veya zincirleme (chaining) fonksiyon çağrılarının kullanıldığı 
+sınıflarda oldukça işlevseldir.
+
+12) Function Overloading: Aynı isimli, fakat farklı sayıda ya da tipte argümanlara sahip fonksiyonlar için 
+fonksiyon yükleme denir. Funksiyon çağrısı yapılırken, fonksiyona verilen 
+argümanların tipi ve sayısı ile örtüşen fonksiyon için çağrı gerçekleşir.  
+
+13) Bir fonksiyonun erişimci (accessor) fonksiyon olduğunu anlamak için aşağıdaki özelliklere 
+dikkat edebilirsin. Erişimci fonksiyonlar, nesneye ait veri üyelerini (genellikle private veya
+protected olan) dış dünyaya güvenli bir şekilde okumak amacıyla kullanılır ve veri üyesinin değerini
+değiştirmezler.
+
+14) Ostream nesnesi overload ederken public altında friend yapmayı unutma
+
+15) Copy constructor oluştururken, private üye elemanlarını 'other' ile initialize etmeyi unutma.
+
+16) Oluşturulan nesneler, scope bitiminde yok edilir.
+
+17) Matematiksel işlem overloadlarında, 2 değişken de input verilir. Ama ostream veya istream'de,
+solda (ostream &os) ve sağda değişken (const ClassName VarName) halinde yapılır.
+
+18) Bir variable'ı başka bir isimle çağırmak için, onu yeni bir referans variable'a assign et.
+
+19) << Overload'unda parametre olarak os'u const yapma!!! Çünkü değiştiriyorsun!
+
+20) Overload situations:
+    # Sınıf içi overload'larda, this nesnesi sol operand olarak kabul edilir.
+    Diğer operand ise parametre olarak alınır.
+
+    # Sınıf dışı overload'larda iki parametre verilir. Ancak sınıfın private
+    verilerine erişmek için friend tanımlamak gerekir.
+
+    # Overload yaparken operator'e göre bir değer döndürmen gerekiyor mu bunu düşün.
+    this keyword'u aklına gelsin.
+    # (+, -, *, /)
+    # (+=, -=, *=, /=)
+    # (==, <, >, <=, >=)
+    # (<<, >>): ostream kendi başına bir class olduğundan, onda class içi ya da dışı
+    tanımlama farketmeksizin 'friend' ibaresi eklenir. os'u return etmeyi unutma.
+
+21) Üye fonksiyonlara const denilebilir. Diğerlerinde hata verir. Örneğin,
+class içinde deklare, class dışında define edilmiş fonksiyonlarda hiçbir yere
+const ekleyemezsin. Class içinde definition verilirse ve bir erişimci fonksiyonsa,
+veya class türünden bir değer return ediyorsa const yaz.
+
+22) Hem işlem yapıp hem atama yapan operatörlerde eski nesne destruct edilir. Buna dikkat et.
+
+23) Set fonksiyonlarını, constructor'ın gövde kısmında kullanabilirsin.
+
+24) void setHours(int h) {this->hours = h;} bu şu demektir:
+    h, bu fonksiyonu çağıran nesnenin hours bileşenine (this->hours)
+    atandı.
+
+25) const kullanım amacı:
+    Bu fonksiyonun, sabit bir fonksiyon olduğunu belirtir. Sabit fonksiyon içerisinde bulunan 
+    kodlamalarda, sınıfın üyesi olan veriler değiştirilemez. Değiştirme içeren kodlama varsa, 
+    derleme işlemi gerçekleşmez. Fonksiyonu kodlayacak olan yazılımcının hata yapmasını engellemek 
+    için bir araçtır.   
+
+26) Method chain işlemi varsa, return *this kullanmalısın. 
+
+27) Nesnenin durumunu değiştirmeyen fonksiyonlara const koy. Nesne parametresi varsa parametrenin başına koy.
+Temel veri tiplerinde gerek yok.
